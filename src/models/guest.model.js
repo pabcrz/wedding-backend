@@ -3,27 +3,27 @@ const mongoose = require("mongoose");
 const modelName = "guest";
 
 const schema = new mongoose.Schema({
-  name: {
+  nombre: {
     type: String,
     required: true,
   },
-  lastName: {
+  apellido: {
     type: String,
     required: true,
   },
-  gender: {
+  sexo: {
     type: String,
     required: true,
   },
-  age: {
-    type: Number,
-    required: true,
-  },
-  family: {
+  categoria: {
     type: String,
     required: true,
   },
-  confirmed: {
+  familia: {
+    type: String,
+    required: true,
+  },
+  asistencia: {
     type: Boolean,
     required: false,
   },
