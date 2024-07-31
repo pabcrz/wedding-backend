@@ -2,9 +2,10 @@ const createError = require("http-errors");
 const Guest = require("../models/guest.model");
 
 async function create(guestData) {
-  const guestExists = await Guest.findOne({ name: guestData.name });
+  guestData.fullName = `${guestData.nombre} ${guestData.apellido}`;
+  const guestExists = await Guest.findOne({ fullName: guestData.fullName });
   if (guestExists) {
-    throw new createError(409, "Guest already exists");
+    throw new createError(409, `Guest ${guestData.fullName} already exists`);
   }
 
   const newGuest = await Guest.create(guestData);
@@ -22,6 +23,7 @@ async function getOne(id) {
 }
 
 async function updateById(id, newGuestData) {
+  newGuestData.fullName = `${newGuestData.nombre} ${newGuestData.apellido}`;
   const updatedGuest = await Guest.findByIdAndUpdate(id, newGuestData, {
     new: true,
   });
