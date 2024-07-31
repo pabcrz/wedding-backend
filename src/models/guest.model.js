@@ -11,6 +11,10 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  fullName: {
+    type: String,
+    required: true,
+  },
   sexo: {
     type: String,
     required: true,
@@ -24,8 +28,8 @@ const schema = new mongoose.Schema({
     required: true,
   },
   asistencia: {
-    type: Boolean,
-    required: false,
+    type: String,
+    required: true,
   },
   table: {
     type: mongoose.Schema.Types.ObjectId,

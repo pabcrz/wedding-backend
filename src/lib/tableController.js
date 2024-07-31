@@ -5,8 +5,12 @@ const setTable = async (request, response) => {
   try {
     const { tableId, guestId } = request.body;
 
+    const allTables = await tableUseCase.getAll();
+
     const table = await tableUseCase.getById(tableId);
+    console.log(table);
     const guest = await guestUseCase.getOne(guestId);
+    console.log(guest);
 
     if (!table) {
       return response.status(404).json({
@@ -33,7 +37,7 @@ const setTable = async (request, response) => {
     if (table.guests.some((guest) => guest._id.toString() === guestId)) {
       return response.status(409).json({
         success: false,
-        message: "Guest is already at the table",
+        message: `${guest.fullName} is already in table: ${table.number}`,
       });
     } else {
       guest.table = tableId;
@@ -45,9 +49,9 @@ const setTable = async (request, response) => {
 
     response.json({
       success: true,
-      message: "Guest added to table",
+      message: `${guest.fullName} is now at table ${table.number}`,
       data: {
-        guest: guest.name + " " + guest.lastName,
+        guest: guest.fullName,
         table,
       },
     });

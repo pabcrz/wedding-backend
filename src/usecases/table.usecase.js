@@ -9,7 +9,7 @@ async function create(tableData) {
 
   const tableNameExists = await Table.findOne({ name: tableData.name });
   if (tableNameExists) {
-    throw new createError(409, "Table Name already exists");
+    throw new createError(409, `Table ${tableData.name} already exists`);
   }
 
   const newTable = await Table.create(tableData);
