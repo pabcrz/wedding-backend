@@ -23,7 +23,6 @@ async function getOne(id) {
 }
 
 async function updateById(id, newGuestData) {
-  newGuestData.fullName = `${newGuestData.nombre} ${newGuestData.apellido}`;
   const updatedGuest = await Guest.findByIdAndUpdate(id, newGuestData, {
     new: true,
   });
